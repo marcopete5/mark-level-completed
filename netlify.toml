@@ -1,0 +1,7 @@
+[build]
+  functions = "functions"
+
+[[redirects]]
+  from = "/trigger-and-redirect"
+  to = "/.netlify/functions/trigger-and-redirect"
+  status = 200

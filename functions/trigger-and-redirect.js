@@ -1,18 +1,30 @@
-const fetch = require('node-fetch');
-require('dotenv').config();
+require('dotenv').config(); // Load environment variables from .env file
 
-exports.handler = async (event) => {
-    const recordId = event.queryStringParameters.recordid;
-    const zapierUrl = process.env.WEBHOOK + `?recordid=${recordId}`;
+export default async (req, context) => {
+    const formUrl = process.env.FORM_URL;
+    const webhookBaseUrl = process.env.WEBHOOK_URL;
 
-    // Trigger the Zapier webhook
-    await fetch(zapierUrl);
-
-    // Redirect to the form URL
-    return {
-        statusCode: 302,
-        headers: {
-            Location: process.env.FORM
+    try {
+        const url = new URL(req.url);
+        const recordId = url.searchParams.get('recordid');
+        const webhookUrlObj = new URL(webhookBaseUrl);
+        if (recordId) {
+            webhookUrlObj.searchParams.set('recordid', recordId);
         }
-    };
+        const finalWebhookUrl = webhookUrlObj.toString();
+
+        await fetch(finalWebhookUrl, {
+            method: 'POST'
+        });
+
+        return new Response(null, {
+            status: 302,
+            headers: { Location: formUrl }
+        });
+    } catch (error) {
+        return new Response(null, {
+            status: 302,
+            headers: { Location: formUrl }
+        });
+    }
 };
