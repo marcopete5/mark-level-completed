@@ -1,5 +1,3 @@
-require('dotenv').config(); // Load environment variables from .env file
-
 export default async (req, context) => {
     // Use environment variables with fallback values
     const formUrl =

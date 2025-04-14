@@ -17,8 +17,5 @@
     "bugs": {
         "url": "https://github.com/marcopete5/mark-level-completed/issues"
     },
-    "homepage": "https://github.com/marcopete5/mark-level-completed#readme",
-    "dependencies": {
-        "dotenv": "^16.5.0"
-    }
+    "homepage": "https://github.com/marcopete5/mark-level-completed#readme"
 }
