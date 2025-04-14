@@ -26,9 +26,15 @@ export default async (req, context) => {
         const finalWebhookUrl = webhookUrlObj.toString();
 
         // Trigger webhook
-        await fetch(finalWebhookUrl, {
+        const webhookResponse = await fetch(finalWebhookUrl, {
             method: 'POST'
         });
+
+        if (!webhookResponse.ok) {
+            console.error(
+                `Webhook failed with status: ${webhookResponse.status}`
+            );
+        }
 
         // Return redirect response
         return {
