@@ -5,3 +5,8 @@
   from = "/trigger-and-redirect"
   to = "/.netlify/functions/trigger-and-redirect"
   status = 200
+
+[[redirects]]
+  from = "/failed-assessment-trigger-redirect"
+  to = "/.netlify/functions/failed-assessment-trigger-redirect"
+  status = 200
